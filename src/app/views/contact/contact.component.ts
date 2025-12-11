@@ -17,7 +17,7 @@ export class ContactComponent {
   contactForm: FormGroup; // 1. Déclarez seulement le type
 
   // URL de l'endpoint du backend Node.js
-  contactFormUrl = 'http://localhost:3000/send-email';
+  contactFormUrl = 'https://cocolab-backend.onrender.com';
 
   // Statut pour l'affichage des messages à l'utilisateur
   submissionStatus: 'initial' | 'sending' | 'success' | 'error' = 'initial';
