@@ -1,0 +1,58 @@
+const express = require('express');
+const nodemailer = require('nodemailer');
+const cors = require('cors');
+require('dotenv').config(); // Pour charger les variables d'environnement
+
+const app = express();
+// Utilise le port du fichier .env ou 3000 par défaut
+const port = process.env.PORT || 3000;
+
+// Middleware CORS: Autorise Angular (par défaut sur 4200) à communiquer avec ce serveur.
+app.use(cors({
+  origin: 'http://localhost:4200'
+}));
+app.use(express.json()); // Pour analyser le corps des requêtes en JSON
+
+// Configuration Nodemailer
+const transporter = nodemailer.createTransport({
+  service: 'gmail',
+  auth: {
+    user: process.env.EMAIL_USER,
+    pass: process.env.EMAIL_PASS
+  }
+});
+
+// Endpoint pour l'envoi d'e-mail
+app.post('/send-email', async (req, res) => {
+  const { name, email, message } = req.body;
+
+  if (!name || !email || !message) {
+    return res.status(400).send({ message: "Tous les champs sont requis." });
+  }
+
+  // Contenu de l'e-mail pour contact.cocolab@gmail.com
+  const mailOptions = {
+    from: `"${name}" <${email}>`, // Nom de l'expéditeur et son e-mail
+    to: 'contact.cocolab@gmail.com', // Adresse de réception finale
+    subject: `Nouveau message de contact CocoLab de: ${name}`,
+    html: `
+            <h3>Détails du message:</h3>
+            <p><strong>Nom:</strong> ${name}</p>
+            <p><strong>Email:</strong> ${email}</p>
+            <p><strong>Message:</strong></p>
+            <p style="white-space: pre-wrap;">${message}</p>
+        `,
+  };
+
+  try {
+    await transporter.sendMail(mailOptions);
+    res.status(200).send({ message: "Message envoyé avec succès!" });
+  } catch (error) {
+    console.error("Erreur d'envoi d'e-mail:", error);
+    res.status(500).send({ message: "Erreur lors de l'envoi du message." });
+  }
+});
+
+app.listen(port, () => {
+  console.log(`Le serveur backend tourne sur le port ${port}`);
+});

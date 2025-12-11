@@ -1,0 +1,5 @@
+<app-navbar></app-navbar>
+
+<router-outlet (activate)="onViewActivated($event)" />
+
+<app-footer *ngIf="showFooter"></app-footer>

@@ -1,0 +1,57 @@
+<section class="min-h-screen py-24 md:py-44 px-4 bg-gray-50">
+  <div class="max-w-4xl mx-auto text-center space-y-16">
+    <h1 class="text-4xl font-bold">À propos de Cocolab</h1>
+    <p class="text-lg text-gray-600">
+      Cocolab est un studio de développement fondé par deux développeurs passionnés, avec l’ambition d’aider 
+      entreprises et particuliers à concrétiser leurs projets numériques. Nous concevons des solutions modernes, 
+      fiables et pensées pour durer, en mettant l’accent sur la qualité, la simplicité d’utilisation et 
+      l’innovation.
+    </p>
+
+    <div #statsSection class="grid md:grid-cols-3 gap-6 section-highlight rounded-2xl p-4">
+      <div *ngFor="let stat of stats" class="bg-white p-6 rounded-xl shadow-sm">
+        <p class="text-3xl font-bold text-[#7F00FF]">
+          {{ stat.prefix || '' }}{{ stat.display }}{{ stat.suffix || '' }}
+        </p>
+        <p class="text-gray-500">{{ stat.label }}</p>
+      </div>
+    </div>
+
+    <h2 class="text-2xl font-bold">Notre philosophie</h2>
+
+    <p class="text-gray-600">
+      Nous croyons qu’un projet réussi repose sur une collaboration étroite avec nos clients. 
+      C’est pourquoi nous prenons le temps de comprendre chaque besoin, chaque idée, 
+      et d’y apporter une réponse technique claire, soignée et adaptée.
+      Qu’il s’agisse de créer un produit complet ou d’accompagner une évolution existante, notre approche 
+      reste la même : écoute, expertise et exigence.
+    </p>
+
+    <h2 class="text-2xl font-bold">Ce qui nous distingue</h2>
+
+    <ul class="grid gap-3 text-left">
+      <li class="flex items-center gap-3 p-4 rounded-2xl bg-white/70 border border-gray-100">
+        <span class="h-2 w-2 rounded-full bg-gradient-to-r from-[#7F00FF] to-[#FF5ACD]"></span>
+        <span class="text-gray-600">Une équipe à taille humaine, impliquée du début à la fin</span>
+      </li>
+      <li class="flex items-center gap-3 p-4 rounded-2xl bg-white/70 border border-gray-100">
+        <span class="h-2 w-2 rounded-full bg-gradient-to-r from-[#7F00FF] to-[#FF5ACD]"></span>
+        <span class="text-gray-600">Une capacité à transformer une idée en solution concrète</span>
+      </li>
+      <li class="flex items-center gap-3 p-4 rounded-2xl bg-white/70 border border-gray-100">
+        <span class="h-2 w-2 rounded-full bg-gradient-to-r from-[#7F00FF] to-[#FF5ACD]"></span>
+        <span class="text-gray-600">Une démarche moderne et orientée qualité</span>
+      </li>
+      <li class="flex items-center gap-3 p-4 rounded-2xl bg-white/70 border border-gray-100">
+        <span class="h-2 w-2 rounded-full bg-gradient-to-r from-[#7F00FF] to-[#FF5ACD]"></span>
+        <span class="text-gray-600">Un accompagnement personnalisé, quel que soit le type de projet</span>
+      </li>
+    </ul>
+
+    <p class="text-gray-600">
+      Cocolab s’engage à livrer des expériences digitales solides, évolutives, et parfaitement 
+      alignées avec les objectifs de chaque client.
+    </p>
+    
+  </div>
+</section>

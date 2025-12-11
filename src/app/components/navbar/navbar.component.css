@@ -1,0 +1,9 @@
+.nav-button-transition {
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.nav-button-hidden {
+  transform: translateY(-150%);
+  opacity: 0;
+  pointer-events: none;
+}

@@ -1,0 +1,33 @@
+.services-section {
+  position: relative;
+  overflow: hidden;
+  min-height: 100vh;
+  background-image: url('../../../assets/fond.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+.services-section::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 0;
+  pointer-events: none;
+}
+
+.services-section > * {
+  position: relative;
+  z-index: 1;
+}
+
+@media (max-width: 768px) {
+  .services-section {
+    background-image: url('../../../assets/fond-tel.png');
+    background-size: cover;
+    background-position: center;
+    background-attachment: scroll;
+  }
+}

@@ -1,0 +1,65 @@
+<section class="min-h-screen bg-white flex items-center justify-center py-16">
+  <div class="container mx-auto px-4 mt-20">
+    <div class="max-w-2xl mx-auto text-center mb-12">
+      <h2 class="text-[#7F00FF] font-bold text-3xl mb-4">Entrons en contact !</h2>
+      <p class="text-black text-lg">Une idée, un projet ou simplement une question ? N’hésitez pas à nous écrire !</p>
+    </div>
+    <div class="max-w-lg mx-auto">
+
+      <form [formGroup]="contactForm" (ngSubmit)="onSubmit()"
+            class="bg-white p-6 rounded-[30px] shadow-[0_0_20px_5px_rgba(127,0,255,0.3)]">
+
+        <div *ngIf="submissionStatus === 'success'" class="bg-green-100 text-green-700 p-4 rounded-md mb-4">
+          ✅ Votre message a été envoyé avec succès!
+        </div>
+        <div *ngIf="submissionStatus === 'error' && errorMessage" class="bg-red-100 text-red-700 p-4 rounded-md mb-4">
+          ❌ {{ errorMessage }}
+        </div>
+        <div *ngIf="submissionStatus === 'sending'" class="bg-blue-100 text-blue-700 p-4 rounded-md mb-4">
+          ... Envoi en cours ...
+        </div>
+
+        <div class="mb-4">
+          <label for="name" class="block text-[#7F00FF] mb-2">Nom complet</label>
+          <input type="text" id="name" placeholder="Votre nom" formControlName="name" required
+                 class="rounded-full w-full px-4 py-2 bg-white text-black border border-[#7F00FF] rounded focus:outline-none focus:ring-2 focus:ring-[#7F00FF]">
+          <div *ngIf="contactForm.get('name')?.invalid && (contactForm.get('name')?.dirty || contactForm.get('name')?.touched)" class="text-red-500 text-sm mt-1">
+            Le nom est requis.
+          </div>
+        </div>
+
+        <div class="mb-4">
+          <label for="email" class="block text-[#7F00FF] mb-2">Adresse email</label>
+          <input type="email" id="email" placeholder="exemple@gmail.com" formControlName="email" required
+                 class="rounded-full w-full px-4 py-2 bg-white text-black border border-[#7F00FF] rounded focus:outline-none focus:ring-2 focus:ring-[#7F00FF]">
+          <div *ngIf="contactForm.get('email')?.invalid && (contactForm.get('email')?.dirty || contactForm.get('email')?.touched)" class="text-red-500 text-sm mt-1">
+            <span *ngIf="contactForm.get('email')?.errors?.['required']">L'email est requis.</span>
+            <span *ngIf="contactForm.get('email')?.errors?.['email']">Format d'email invalide.</span>
+          </div>
+        </div>
+
+        <div class="mb-4">
+          <label for="message" class="block text-[#7F00FF] mb-2">Message</label>
+          <textarea id="message" rows="5" placeholder="Votre message..." formControlName="message" required
+                    class="rounded-[20px] w-full px-4 py-2 bg-white text-black border border-[#7F00FF] rounded focus:outline-none focus:ring-2 focus:ring-[#7F00FF]"></textarea>
+          <div *ngIf="contactForm.get('message')?.invalid && (contactForm.get('message')?.dirty || contactForm.get('message')?.touched)" class="text-red-500 text-sm mt-1">
+            Le message est requis.
+          </div>
+        </div>
+
+        <button type="submit" [disabled]="contactForm.invalid || submissionStatus === 'sending'"
+                class="rounded-full w-full py-2 bg-[#7F00FF] text-white border border-[#7F00FF] transition"
+                [ngClass]="{'opacity-50 cursor-not-allowed': contactForm.invalid || submissionStatus === 'sending', 'hover:bg-transparent hover:text-black': contactForm.valid && submissionStatus !== 'sending'}">
+          {{ submissionStatus === 'sending' ? 'Envoi...' : 'Envoyer' }}
+        </button>
+      </form>
+
+      <div class="p-6 flex justify-center gap-4">
+        <a href="#" class="bg-[#7F00FF] text-white p-2 rounded-md border border-[#7F00FF] hover:bg-transparent hover:text-[#7F00FF] transition"><i class="fab fa-instagram fa-lg"></i></a>
+        <a href="#" class="bg-[#7F00FF] text-white p-2 rounded-md border border-[#7F00FF] hover:bg-transparent hover:text-[#7F00FF] transition"><i class="fab fa-github fa-lg"></i></a>
+        <a href="#" class="bg-[#7F00FF] text-white p-2 rounded-md border border-[#7F00FF] hover:bg-transparent hover:text-[#7F00FF] transition"><i class="fab fa-linkedin fa-lg"></i></a>
+        <a href="mailto:contact.cocolab@gmail.com" class="bg-[#7F00FF] text-white p-2 rounded-md border border-[#7F00FF] hover:bg-transparent hover:text-[#7F00FF] transition"><i class="fas fa-envelope fa-lg"></i></a>
+      </div>
+    </div>
+  </div>
+</section>
