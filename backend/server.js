@@ -33,11 +33,13 @@ app.use(express.json()); // Pour analyser le corps des requêtes en JSON
 
 // Configuration Nodemailer
 const transporter = nodemailer.createTransport({
-  service: 'gmail',
-  auth: {
-    user: process.env.EMAIL_USER,
-    pass: process.env.EMAIL_PASS
-  }
+    host: 'smtp.gmail.com',
+    port: 465,
+    secure: true, // utilise SSL
+    auth: {
+        user: process.env.EMAIL_USER,
+        pass: process.env.EMAIL_PASS
+    }
 });
 
 // Endpoint pour l'envoi d'e-mail
