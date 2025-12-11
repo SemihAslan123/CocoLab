@@ -37,20 +37,19 @@ app.post('/send-email', async (req, res) => {
     }
 
     try {
-        // Envoi du mail via Brevo API
-        await axios.post(
+        const response = await axios.post(
             "https://api.brevo.com/v3/smtp/email",
             {
                 sender: { name, email },
                 to: [{ email: "contact.cocolab@gmail.com" }],
                 subject: `Nouveau message de contact CocoLab`,
                 htmlContent: `
-          <h3>Nouveau message :</h3>
-          <p><strong>Nom :</strong> ${name}</p>
-          <p><strong>Email :</strong> ${email}</p>
-          <p><strong>Message :</strong></p>
-          <p>${message}</p>
-        `
+        <h3>Nouveau message :</h3>
+        <p><strong>Nom :</strong> ${name}</p>
+        <p><strong>Email :</strong> ${email}</p>
+        <p><strong>Message :</strong></p>
+        <p>${message}</p>
+      `
             },
             {
                 headers: {
@@ -60,6 +59,7 @@ app.post('/send-email', async (req, res) => {
             }
         );
 
+        console.log("👉 Brevo a répondu :", response.data);
         res.status(200).send({ message: "Message envoyé avec succès !" });
 
     } catch (error) {
