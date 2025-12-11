@@ -7,9 +7,27 @@ const app = express();
 // Utilise le port du fichier .env ou 3000 par défaut
 const port = process.env.PORT || 3000;
 
-// Middleware CORS: Autorise Angular (par défaut sur 4200) à communiquer avec ce serveur.
+// Liste des adresses autorisées à contacter le serveur
+const allowedOrigins = [
+    'http://cocolab.fr',
+    'https://cocolab.fr',
+    'http://www.cocolab.fr',
+    'https://www.cocolab.fr',
+    'http://localhost:4200'
+];
+
 app.use(cors({
-  origin: 'http://cocolab.fr'
+    origin: function (origin, callback) {
+        // Autorise les requêtes sans origine (comme Postman ou applications mobiles)
+        if (!origin) return callback(null, true);
+
+        if (allowedOrigins.indexOf(origin) === -1) {
+            // Si l'origine n'est pas dans la liste, on bloque
+            const msg = 'La politique CORS interdit l’accès depuis cette origine.';
+            return callback(new Error(msg), false);
+        }
+        return callback(null, true);
+    }
 }));
 app.use(express.json()); // Pour analyser le corps des requêtes en JSON
 
