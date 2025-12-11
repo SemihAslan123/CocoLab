@@ -9,7 +9,7 @@ const port = process.env.PORT || 3000;
 
 // Middleware CORS: Autorise Angular (par défaut sur 4200) à communiquer avec ce serveur.
 app.use(cors({
-  origin: 'http://localhost:4200'
+  origin: 'http://cocolab.fr'
 }));
 app.use(express.json()); // Pour analyser le corps des requêtes en JSON
 
